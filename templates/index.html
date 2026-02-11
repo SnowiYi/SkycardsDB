@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BigDB Leaderboards</title>
+    <style>
+      :root{--bg:#0b1220;--panel:#071026;--muted:#9aa4b2;--accent:#e6eef8}
+      body{font-family:Inter,system-ui,Segoe UI,Arial;background:var(--bg);color:var(--accent);margin:0;padding:24px}
+      .wrap{max-width:1100px;margin:0 auto}
+      header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+      h1{font-size:20px;margin:0}
+      .search{display:flex;gap:8px}
+      input[name="q"]{padding:8px 10px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;min-width:260px;background:transparent;color:var(--accent)}
+      button{background:#111827;color:#fff;border:0;padding:8px 12px;border-radius:6px}
+      .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+      .panel{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:var(--panel)}
+      table{width:100%;border-collapse:collapse}
+      td,th{padding:6px 4px;text-align:left;font-size:13px;color:var(--accent)}
+      tr:nth-child(odd){background:transparent}
+      .avatar{width:28px;height:28px;border-radius:50%;object-fit:cover;margin-right:8px;vertical-align:middle;border:1px solid rgba(255,255,255,0.04)}
+      .namecell{display:flex;align-items:center}
+      a.userlink{color:var(--accent);text-decoration:none}
+      a.userlink:hover{text-decoration:underline}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>BigDB Leaderboards</h1>
+        <form class="search" action="/user" method="get">
+          <input name="q" placeholder="Search username or paste userId" />
+          <button type="submit">Lookup</button>
+        </form>
+      </header>
+
+      <div class="grid">
+        <div class="panel">
+          <strong>Top 10 — XP</strong>
+          <table>
+            <tbody>
+              {% for u in top_xp %}
+              <tr>
+                <td style="width:28px">{{ loop.index }}</td>
+                <td class="namecell"><img class="avatar" src="https://cdn.skycards.oldapes.com/assets/avatar/64/{{ u['userId'] }}.png" alt=""><a class="userlink" href="/user?q={{ u['userId'] }}">{{ u['userName'] }}</a></td>
+                <td style="width:120px">{{ u['userXP'] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <strong>Top 10 — Aircraft</strong>
+          <table>
+            <tbody>
+              {% for u in top_aircraft %}
+              <tr>
+                <td style="width:28px">{{ loop.index }}</td>
+                <td class="namecell"><img class="avatar" src="https://cdn.skycards.oldapes.com/assets/avatar/64/{{ u['userId'] }}.png" alt=""><a class="userlink" href="/user?q={{ u['userId'] }}">{{ u['userName'] }}</a></td>
+                <td style="width:120px">{{ u['aircraftCount'] or 0 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <strong>Top 10 — Destinations</strong>
+          <table>
+            <tbody>
+              {% for u in top_airport %}
+              <tr>
+                <td style="width:28px">{{ loop.index }}</td>
+                <td class="namecell"><img class="avatar" src="https://cdn.skycards.oldapes.com/assets/avatar/64/{{ u['userId'] }}.png" alt=""><a class="userlink" href="/user?q={{ u['userId'] }}">{{ u['userName'] }}</a></td>
+                <td style="width:120px">{{ u['destinations'] or 0 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel">
+          <strong>Top 10 — Battle Wins</strong>
+          <table>
+            <tbody>
+              {% for u in top_battles %}
+              <tr>
+                <td style="width:28px">{{ loop.index }}</td>
+                <td class="namecell"><img class="avatar" src="https://cdn.skycards.oldapes.com/assets/avatar/64/{{ u['userId'] }}.png" alt=""><a class="userlink" href="/user?q={{ u['userId'] }}">{{ u['userName'] }}</a></td>
+                <td style="width:120px">{{ u['battleWins'] or 0 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

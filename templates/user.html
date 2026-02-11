@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Lookup</title>
+    <style>
+      :root{--bg:#0b1220;--panel:#071026;--muted:#9aa4b2;--accent:#e6eef8}
+      body{font-family:Inter,system-ui,Segoe UI,Arial;background:var(--bg);color:var(--accent);margin:0;padding:24px}
+      .wrap{max-width:780px;margin:0 auto}
+      form{display:flex;gap:8px;margin-bottom:16px}
+      input[name="q"]{flex:1;padding:8px;border:1px solid rgba(255,255,255,0.06);border-radius:6px;background:transparent;color:var(--accent)}
+      button{background:#111827;color:#fff;border:0;padding:8px 12px;border-radius:6px}
+      .card{border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;background:var(--panel)}
+      .avatar-lg{width:96px;height:96px;border-radius:50%;object-fit:cover;margin-right:12px;border:1px solid rgba(255,255,255,0.04)}
+      .user-head{display:flex;align-items:center;margin-bottom:12px}
+      table{width:100%;border-collapse:collapse;margin-top:8px}
+      td,th{padding:6px 4px;font-size:14px;color:var(--accent)}
+      a.userlink{color:var(--accent);text-decoration:none}
+      a.userlink:hover{text-decoration:underline}
+      .ach-tile{position:relative}
+      .ach-tooltip{position:absolute;bottom:110%;left:50%;transform:translateX(-50%) translateY(0);background:rgba(0,0,0,0.85);color:#fff;padding:8px 10px;border-radius:8px;white-space:nowrap;font-size:13px;opacity:0;pointer-events:none;transition:opacity .12s, transform .12s;z-index:20}
+      .ach-tooltip:after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid rgba(0,0,0,0.85)}
+      .ach-tile:hover .ach-tooltip{opacity:1;transform:translateX(-50%) translateY(-6px)}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1 style="margin-bottom:10px">User Lookup</h1>
+
+      <form action="/user" method="get">
+        <input name="q" value="{{query}}" placeholder="Search username or paste userId" />
+        <button type="submit">Lookup</button>
+      </form>
+
+      {% if result %}
+      <div class="card" style="text-align:center;padding:24px;">
+        <img style="width:64px;height:64px;border-radius:50%;object-fit:cover;margin:6px auto;border:4px solid rgba(0,0,0,0.4)" src="https://cdn.skycards.oldapes.com/assets/avatar/64/{{ result['userId'] }}.png" alt="avatar">
+        <div style="font-size:36px;font-weight:800;text-shadow:0 6px 0 rgba(0,0,0,0.5);margin-top:6px">{{ result['userName'] }}</div>
+        <div style="color:#60a5fa;font-weight:800;margin-top:6px;font-size:20px">Level {{ result['level'] }}</div>
+
+        <div style="margin:14px auto 8px;max-width:640px;">
+          <div style="background:rgba(255,255,255,0.04);height:14px;border-radius:14px;overflow:hidden">
+            <div style="height:100%;background:linear-gradient(90deg,#38bdf8,#06b6d4);width:{{ (result['progress'] * 100) | round(1) }}%"></div>
+          </div>
+        </div>
+        <div style="color:var(--muted);font-size:13px;margin-bottom:10px">
+          {{ result['xp'] }} XP
+          {% if result['next'] %}
+          — {{ (result['xp'] - result['curr']) | int }} / {{ (result['next'] - result['curr']) | int }} to next
+          {% else %}
+          — Max level
+          {% endif %}
+        </div>
+
+        <!-- Battle and menu buttons removed per preference -->
+
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:640px;margin:14px auto">
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:10px">Victories<br><strong style="font-size:18px">{{ result['battleWins'] or 0 }}</strong></div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:10px">Aircraft<br><strong style="font-size:18px">{{ result['aircraftCount'] or 0 }}</strong></div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:10px">Airports<br><strong style="font-size:18px">{{ result['destinations'] or 0 }}</strong></div>
+          <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:10px">Trophies<br><strong style="font-size:18px">{{ result['trophies']|length }} of {{ result['all_ach_count'] }}</strong></div>
+        </div>
+
+        <div style="margin-top:18px;text-align:left;max-width:760px;margin-left:auto;margin-right:auto">
+          <div style="font-weight:900;font-size:32px;text-align:center;letter-spacing:2px">TROPHIES</div>
+          <div style="text-align:center;color:var(--muted);margin-bottom:10px">{{ result['trophies']|length }} of {{ result['all_ach_count'] }}</div>
+          <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+            {% for a in result['ach_list'] %}
+            <div class="ach-tile" style="border-radius:10px;height:56px;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:default;">
+              {% if a.owned %}
+              <div style="width:48px;height:48px;border-radius:8px;background:linear-gradient(90deg,#38bdf8,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 0 rgba(0,0,0,0.35);color:#071026">{{ a.emoji }}</div>
+              {% else %}
+              <div style="width:48px;height:48px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;font-size:22px;opacity:0.35;color:var(--muted)">
+                🔒
+              </div>
+              {% endif %}
+              <div class="ach-tooltip">
+                <div style="font-weight:700">{{ a.name }}</div>
+                {% if a.desc %}
+                <div style="font-size:12px;color:#cbd5e1;margin-top:4px;max-width:260px;white-space:normal;text-align:left">{{ a.desc }}</div>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if rows %}
+      <div style="margin-top:12px">
+        <div style="font-weight:600;margin-bottom:8px">Matches</div>
+        <table>
+          <thead><tr><th>#</th><th>Name</th><th>XP</th><th>Aircraft</th><th>Dest</th><th>Wins</th></tr></thead>
+          <tbody>
+            {% for u in rows %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td style="display:flex;align-items:center"><img class="avatar-lg" style="width:36px;height:36px;margin-right:8px;border-radius:8px" src="https://cdn.skycards.oldapes.com/assets/avatar/64/{{ u['userId'] }}.png"><a class="userlink" href="/user?q={{ u['userId'] }}">{{ u['userName'] }}</a></td>
+              <td style="min-width:180px">
+                <div style="font-size:13px">Level {{ u['level'] }}</div>
+                <div style="background:rgba(255,255,255,0.04);height:8px;border-radius:6px;overflow:hidden">
+                  <div style="height:100%;background:#155864;width:{{ (u['progress'] * 100) | round(0) }}%"></div>
+                </div>
+              </td>
+              <td>{{ u['aircraftCount'] or 0 }}</td>
+              <td>{{ u['destinations'] or 0 }}</td>
+              <td>{{ u['battleWins'] or 0 }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+
+      <p style="margin-top:18px"><a href="/">Back to leaderboards</a></p>
+    </div>
+  </body>
+</html>
