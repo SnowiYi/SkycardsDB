@@ -1,8 +1,25 @@
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request, g, jsonify
 import sqlite3
+import requests
 from pathlib import Path
+import logging
 
 app = Flask(__name__)
+
+# API configuration for fetching user data
+API_PROFILE_TEMPLATE = "https://api.skycards.oldapes.com/users/pub/{}"
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTljMmVmMi0xMDEyLTcwNjEtYWUzNS0wNjlmMThhZTQyYjIiLCJqdGkiOiJIaVdiZlVFM0lnMjBONkhqYnVWT2pfeGFZa2VlNDRaSVZHcFpXX2htSGVNIiwiaWF0IjoxNzcwODI1MzM3LCJleHAiOjQ5MjY1ODUzMzd9.-fOLPEtuvKqOuLnk2EZT8f_Lf-ymMIp4_vjnVgqzNEo"
+API_HEADERS = {
+    "Authorization": f"Bearer {token}",
+    "accept": "application/json",
+    "accept-encoding": "gzip",
+    "content-type": "application/json",
+    "Host": "api.skycards.oldapes.com",
+    "User-Agent": "okhttp/4.12.0",
+    "x-client-version": "2.0.24",
+}
+
+logging.basicConfig(level=logging.INFO)
 
 # DB file location: use workspace-local BigDB/data/DB/highscore.db
 DB_DIR = Path(__file__).resolve().parent / "data" / "DB"
@@ -33,6 +50,93 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
+
+
+def refresh_user_data(user_id):
+    """
+    Fetch user data from the API and update the leaderboard database.
+    
+    Args:
+        user_id (str): The UUID of the user to refresh
+        
+    Returns:
+        dict: Contains updated user data or error information
+    """
+    url = API_PROFILE_TEMPLATE.format(user_id)
+    logging.info(f"Fetching user data from API for UUID: {user_id}")
+    
+    try:
+        resp = requests.get(url, headers=API_HEADERS, timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        
+        # Extract relevant stats from API response, try multiple possible field names
+        user_xp = data.get("userXP") or data.get("xp")
+        if user_xp is None:
+            logging.warning(f"No XP data found in API response for {user_id}")
+            return {
+                "success": False,
+                "userId": user_id,
+                "error": "API response missing userXP/xp field"
+            }
+        
+        user_name = data.get("userName", "Unknown")
+        aircraft_count = data.get("aircraftCount") or data.get("aircraft_count") or data.get("numAircraftModels") or 0
+        destinations = data.get("destinations") or data.get("destinationsCount") or data.get("numDestinations") or 0
+        battle_wins = data.get("battleWins") or data.get("battlesWon") or data.get("wins") or data.get("numBattleWins") or 0
+        
+        # Update database
+        db = get_db()
+        
+        # Check if user exists
+        cur = db.execute("SELECT userId FROM airport_highscore WHERE userId = ?", (user_id,))
+        exists = cur.fetchone()
+        
+        if exists:
+            # Update existing user
+            db.execute(
+                """UPDATE airport_highscore 
+                   SET userName = ?, userXP = ?, aircraftCount = ?, destinations = ?, battleWins = ? 
+                   WHERE userId = ?""",
+                (user_name, user_xp, aircraft_count, destinations, battle_wins, user_id)
+            )
+            logging.info(f"Updated user {user_name} (ID: {user_id})")
+        else:
+            # Insert new user
+            db.execute(
+                """INSERT INTO airport_highscore (userId, userName, userXP, aircraftCount, destinations, battleWins)
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (user_id, user_name, user_xp, aircraft_count, destinations, battle_wins)
+            )
+            logging.info(f"Added new user {user_name} (ID: {user_id})")
+        
+        db.commit()
+        
+        return {
+            "success": True,
+            "userId": user_id,
+            "userName": user_name,
+            "userXP": user_xp,
+            "aircraftCount": aircraft_count,
+            "destinations": destinations,
+            "battleWins": battle_wins,
+            "message": f"Successfully refreshed {user_name}"
+        }
+        
+    except requests.RequestException as e:
+        logging.error(f"API request failed for user {user_id}: {e}")
+        return {
+            "success": False,
+            "userId": user_id,
+            "error": f"API request failed: {str(e)}"
+        }
+    except Exception as e:
+        logging.error(f"Failed to refresh user {user_id}: {e}")
+        return {
+            "success": False,
+            "userId": user_id,
+            "error": f"Database update failed: {str(e)}"
+        }
 
 
 def top_by(column, limit=10):
@@ -196,6 +300,17 @@ def compute_level(xp):
     return {"level": level, "xp": xp, "curr": curr, "next": nxt, "progress": progress}
 
 
+@app.route('/refresh-user/<user_id>', methods=['GET', 'POST'])
+def refresh_user_route(user_id):
+    """
+    HTTP endpoint to refresh a specific user's data from the API.
+    
+    Usage: GET /refresh-user/{user_id}
+    """
+    result = refresh_user_data(user_id)
+    return jsonify(result)
+
+
 @app.route('/')
 def index():
     top_xp = top_by('userXP')
@@ -294,4 +409,4 @@ def user_lookup():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5050, debug=True)
