@@ -9,6 +9,9 @@ import sys
 import argparse
 from multiprocessing import cpu_count
 from tqdm import tqdm
+import time
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 DB_PATH = "data/DB/highscore.db"
 
@@ -55,9 +58,28 @@ def get_db_connection():
     return _thread_local.db_conn
 
 def get_http_session():
-    """Get or create an HTTP session for the current thread."""
+    """Get or create an HTTP session for the current thread with connection pooling and retry strategy."""
     if not hasattr(_thread_local, 'http_session'):
-        _thread_local.http_session = requests.Session()
+        session = requests.Session()
+        
+        # Configure retry strategy with exponential backoff
+        retry_strategy = Retry(
+            total=3,  # total number of retries
+            backoff_factor=0.5,  # exponential backoff: 0.5s, 1s, 2s
+            status_forcelist=[429, 500, 502, 503, 504],  # retry on these status codes
+            allowed_methods=["GET"]
+        )
+        
+        # Create HTTPAdapter with connection pooling and retry strategy
+        adapter = HTTPAdapter(
+            max_retries=retry_strategy,
+            pool_connections=100,
+            pool_maxsize=100
+        )
+        session.mount("https://", adapter)
+        session.mount("http://", adapter)
+        
+        _thread_local.http_session = session
     return _thread_local.http_session
 
 def close_db_connection():
@@ -100,10 +122,11 @@ def flush_batch_updates():
         return 0
 
 def refresh_stats(person_id, username):
+    """Fetch user stats from API with automatic retry on failure."""
     url = API_PROFILE_TEMPLATE.format(person_id)
     try:
         session = get_http_session()
-        resp = session.get(url, headers=HEADERS, timeout=10)
+        resp = session.get(url, headers=HEADERS, timeout=5)  # Reduced timeout to 5s
         resp.raise_for_status()
         data = resp.json()
         # Extract all user stats from API response
@@ -128,7 +151,8 @@ def refresh_stats(person_id, username):
         battle_wins = data.get("battleWins") or data.get("battlesWon") or data.get("numBattleWins") or 0
         return (user_name, user_xp, aircraft_ct, dest_ct, battle_wins)
     except Exception as e:
-        # If API call fails, keep existing username
+        # If API call fails after retries, keep existing username
+        logging.debug(f"Failed to fetch data for user {person_id}: {e}")
         return (username, 0, 0, 0, 0)
 
 

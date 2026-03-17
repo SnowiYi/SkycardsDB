@@ -10,6 +10,7 @@ from datetime import date
 from typing import List, Optional
 import argparse
 import sys
+from tqdm import tqdm
 # Use a workspace-local DB at BigDB/data/DB/highscore.db
 DB_DIR = Path(__file__).resolve().parent / "data" / "DB"
 DB_DIR.mkdir(parents=True, exist_ok=True)
@@ -559,12 +560,14 @@ def process_all_airports(max_workers: int = 12, weeks: Optional[List[str]] = Non
         print(f"Starting week {iso} (processing {len(airports)} airports)")
         with ThreadPoolExecutor(max_workers=max_workers) as ex:
             futures = {ex.submit(worker, a, iso): a for a in airports}
-            for fut in as_completed(futures):
-                try:
-                    s = fut.result()
-                    total_saved += s
-                except Exception as e:
-                    print("Worker error:", e)
+            with tqdm(total=len(futures), desc=f"Week {iso}", unit="airport") as pbar:
+                for fut in as_completed(futures):
+                    try:
+                        s = fut.result()
+                        total_saved += s
+                    except Exception as e:
+                        print("Worker error:", e)
+                    pbar.update(1)
     # signal writer to finish
     q.put("__SENTINEL__")
     writer.join()
