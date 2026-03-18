@@ -169,22 +169,23 @@ def init_scheduler():
     try:
         scheduler = BackgroundScheduler()
         
-        # Schedule the refresh task to run every hour, starting 10 seconds after app starts
+        # Schedule the refresh task to run every hour, starting 2 seconds after app starts
+        # Uses daemon thread so it won't block Flask
         scheduler.add_job(
             run_refresh_tasks,
             'interval',
             hours=1,
-            seconds=10,  # First run after 10 seconds to let Flask start
+            seconds=2,  # First run after 2 seconds, then every hour
             id='refresh_job',
             name='Refresh SkyCards data',
             replace_existing=True,
             max_instances=1
         )
         
-        # Start the scheduler
+        # Start the scheduler with daemon thread (won't block web server)
         if not scheduler.running:
-            scheduler.start()
-            logging.info("🚀 Background scheduler initialized - first refresh in 10 seconds, then every hour")
+            scheduler.start(paused=False)
+            logging.info("🚀 Background scheduler initialized - first refresh in 2 seconds, then every hour")
         
         return scheduler
     except Exception as e:
