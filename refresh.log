@@ -1,0 +1,49 @@
+2026-03-18 08:50:02,268 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:50:02,268 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:50:02,268 - INFO - Scheduler started
+2026-03-18 08:50:02,268 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
+2026-03-18 08:50:02,284 - WARNING -  * Debugger is active!
+2026-03-18 08:50:02,291 - INFO -  * Debugger PIN: 872-046-699
+2026-03-18 08:50:04,303 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
+2026-03-18 08:50:04,476 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:50:04,477 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:50:04,477 - INFO - Scheduler started
+2026-03-18 08:50:04,477 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
+2026-03-18 08:50:04,491 - WARNING -  * Debugger is active!
+2026-03-18 08:50:04,496 - INFO -  * Debugger PIN: 872-046-699
+2026-03-18 08:50:12,562 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
+2026-03-18 08:50:12,755 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:50:12,755 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:50:12,755 - INFO - Scheduler started
+2026-03-18 08:50:12,756 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
+2026-03-18 08:50:12,769 - WARNING -  * Debugger is active!
+2026-03-18 08:50:12,775 - INFO -  * Debugger PIN: 872-046-699
+2026-03-18 08:50:15,803 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
+2026-03-18 08:50:15,992 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:50:15,993 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:50:15,993 - INFO - Scheduler started
+2026-03-18 08:50:15,993 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
+2026-03-18 08:50:16,007 - WARNING -  * Debugger is active!
+2026-03-18 08:50:16,013 - INFO -  * Debugger PIN: 872-046-699
+2026-03-18 08:50:27,006 - INFO - ================================================================================
+2026-03-18 08:50:27,007 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-18 08:50:27,007 - INFO - ================================================================================
+2026-03-18 08:50:27,010 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:50:27,011 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:50:27,011 - INFO - Scheduler started
+2026-03-18 08:50:27,011 - INFO - 🚀 Background scheduler initialized - first refresh in 10 seconds, then every hour
+2026-03-18 08:50:27,033 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.0.0.2:5050
+2026-03-18 08:50:27,033 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-18 08:50:27,034 - INFO -  * Restarting with stat
+2026-03-18 08:50:27,178 - INFO - ================================================================================
+2026-03-18 08:50:27,178 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-18 08:50:27,178 - INFO - ================================================================================
+2026-03-18 08:50:27,181 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:50:27,182 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:50:27,182 - INFO - Scheduler started
+2026-03-18 08:50:27,182 - INFO - 🚀 Background scheduler initialized - first refresh in 10 seconds, then every hour
+2026-03-18 08:50:27,195 - WARNING -  * Debugger is active!
+2026-03-18 08:50:27,201 - INFO -  * Debugger PIN: 872-046-699

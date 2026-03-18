@@ -3,8 +3,22 @@ import sqlite3
 import requests
 from pathlib import Path
 import logging
+import subprocess
+from datetime import datetime, timedelta
+import json
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
+
+# Refresh scheduler state
+REFRESH_STATE = {
+    'last_refresh': None,
+    'next_refresh': None,
+    'total_users': 0,
+    'refresh_interval_hours': 1,
+    'status': 'idle',
+    'last_error': None,
+}
 
 # API configuration for fetching user data
 API_PROFILE_TEMPLATE = "https://api.skycards.oldapes.com/users/pub/{}"
@@ -19,12 +33,116 @@ API_HEADERS = {
     "x-client-version": "2.0.24",
 }
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('refresh.log'),
+        logging.StreamHandler()
+    ]
+)
 
 # DB file location: use workspace-local BigDB/data/DB/highscore.db
 DB_DIR = Path(__file__).resolve().parent / "data" / "DB"
 DB_DIR.mkdir(parents=True, exist_ok=True)
 DB_PATH = DB_DIR / "highscore.db"
+
+
+def get_total_users():
+    """Get the total count of users in the database."""
+    try:
+        db = get_db()
+        cur = db.execute("SELECT COUNT(*) as count FROM airport_highscore")
+        row = cur.fetchone()
+        return row['count'] if row else 0
+    except Exception as e:
+        logging.error(f"Error counting users: {e}")
+        return 0
+
+
+def run_refresh_tasks():
+    """Run the two refresh commands: api_test.py and Refresh.py"""
+    try:
+        REFRESH_STATE['status'] = 'running'
+        REFRESH_STATE['last_error'] = None
+        
+        work_dir = Path(__file__).resolve().parent
+        
+        # Log the start of the refresh cycle
+        logging.info("=" * 80)
+        logging.info("🔄 REFRESH CYCLE STARTED")
+        logging.info(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        logging.info("=" * 80)
+        
+        # Run api_test.py
+        logging.info("▶️  Starting api_test.py with --last 1 --workers 125...")
+        try:
+            result = subprocess.run(
+                ['python3', 'api_test.py', '--last', '1', '--workers', '125'],
+                cwd=work_dir,
+                capture_output=True,
+                timeout=600,
+                text=True
+            )
+            if result.returncode == 0:
+                logging.info(f"✅ api_test.py completed successfully")
+                if result.stdout:
+                    logging.info(f"Output: {result.stdout[:500]}")
+            else:
+                logging.warning(f"❌ api_test.py exited with code {result.returncode}")
+                logging.warning(f"Error: {result.stderr[:300]}")
+                REFRESH_STATE['last_error'] = f"api_test.py failed: {result.stderr[:200]}"
+        except subprocess.TimeoutExpired:
+            logging.error(f"❌ api_test.py timed out after 600 seconds")
+            REFRESH_STATE['last_error'] = "api_test.py timed out"
+        except Exception as e:
+            logging.error(f"❌ Error running api_test.py: {e}")
+            REFRESH_STATE['last_error'] = str(e)[:200]
+        
+        # Run Refresh.py
+        logging.info("▶️  Starting Refresh.py with --threads 125...")
+        try:
+            result = subprocess.run(
+                ['python3', 'Refresh.py', '--threads', '125'],
+                cwd=work_dir,
+                capture_output=True,
+                timeout=600,
+                text=True
+            )
+            if result.returncode == 0:
+                logging.info(f"✅ Refresh.py completed successfully")
+                if result.stdout:
+                    logging.info(f"Output: {result.stdout[:500]}")
+            else:
+                logging.warning(f"❌ Refresh.py exited with code {result.returncode}")
+                logging.warning(f"Error: {result.stderr[:300]}")
+                if not REFRESH_STATE['last_error']:  # Preserve api_test error if present
+                    REFRESH_STATE['last_error'] = f"Refresh.py failed: {result.stderr[:200]}"
+        except subprocess.TimeoutExpired:
+            logging.error(f"❌ Refresh.py timed out after 600 seconds")
+            if not REFRESH_STATE['last_error']:
+                REFRESH_STATE['last_error'] = "Refresh.py timed out"
+        except Exception as e:
+            logging.error(f"❌ Error running Refresh.py: {e}")
+            if not REFRESH_STATE['last_error']:
+                REFRESH_STATE['last_error'] = str(e)[:200]
+        
+        # Update refresh state
+        REFRESH_STATE['last_refresh'] = datetime.now().isoformat()
+        REFRESH_STATE['next_refresh'] = (datetime.now() + timedelta(hours=1)).isoformat()
+        REFRESH_STATE['total_users'] = get_total_users()
+        REFRESH_STATE['status'] = 'idle'
+        
+        logging.info("=" * 80)
+        logging.info("✅ REFRESH CYCLE COMPLETED")
+        logging.info(f"Total users in database: {REFRESH_STATE['total_users']}")
+        logging.info(f"Next refresh scheduled: {REFRESH_STATE['next_refresh']}")
+        logging.info("=" * 80)
+        
+    except Exception as e:
+        logging.error(f"❌ Unexpected error in run_refresh_tasks: {e}")
+        REFRESH_STATE['status'] = 'error'
+        REFRESH_STATE['last_error'] = str(e)[:200]
 
 
 def get_db():
@@ -43,6 +161,38 @@ def get_db():
             pass
         g._database = db
     return db
+
+
+# Initialize APScheduler
+def init_scheduler():
+    """Initialize the background scheduler for refresh tasks."""
+    try:
+        scheduler = BackgroundScheduler()
+        
+        # Schedule the refresh task to run every hour, starting 10 seconds after app starts
+        scheduler.add_job(
+            run_refresh_tasks,
+            'interval',
+            hours=1,
+            seconds=10,  # First run after 10 seconds to let Flask start
+            id='refresh_job',
+            name='Refresh SkyCards data',
+            replace_existing=True,
+            max_instances=1
+        )
+        
+        # Start the scheduler
+        if not scheduler.running:
+            scheduler.start()
+            logging.info("🚀 Background scheduler initialized - first refresh in 10 seconds, then every hour")
+        
+        return scheduler
+    except Exception as e:
+        logging.error(f"Failed to initialize scheduler: {e}")
+        return None
+
+
+scheduler = None
 
 
 @app.teardown_appcontext
@@ -311,13 +461,26 @@ def refresh_user_route(user_id):
     return jsonify(result)
 
 
+@app.route('/api/status', methods=['GET'])
+def get_status():
+    """Get the current refresh status and stats."""
+    status_copy = REFRESH_STATE.copy()
+    status_copy['total_users'] = get_total_users()  # Always get current count
+    return jsonify(status_copy)
+
+
 @app.route('/')
 def index():
     top_xp = top_by('userXP')
     top_aircraft = top_by('aircraftCount')
     top_airport = top_by('destinations')
     top_battles = top_by('battleWins')
-    return render_template('index.html', top_xp=top_xp, top_aircraft=top_aircraft, top_airport=top_airport, top_battles=top_battles)
+    
+    # Get current status
+    status = REFRESH_STATE.copy()
+    status['total_users'] = get_total_users()
+    
+    return render_template('index.html', top_xp=top_xp, top_aircraft=top_aircraft, top_airport=top_airport, top_battles=top_battles, status=status)
 
 
 @app.route('/user', methods=['GET'])
@@ -409,4 +572,10 @@ def user_lookup():
 
 
 if __name__ == '__main__':
+    # Initialize the background scheduler on startup
+    logging.info("=" * 80)
+    logging.info("🌐 Starting Flask server on http://0.0.0.0:5050")
+    logging.info("=" * 80)
+    scheduler = init_scheduler()
+    
     app.run(host='0.0.0.0', port=5050, debug=True)

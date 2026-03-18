@@ -6,7 +6,20 @@
     <title>BigDB Leaderboards</title>
     <style>
       :root{--bg:#0b1220;--panel:#071026;--muted:#9aa4b2;--accent:#e6eef8}
-      body{font-family:Inter,system-ui,Segoe UI,Arial;background:var(--bg);color:var(--accent);margin:0;padding:24px}
+      body{font-family:Inter,system-ui,Segoe UI,Arial;background:var(--bg);color:var(--accent);margin:0;padding:0}
+      .main-container{display:flex;min-height:100vh}
+      .sidebar{width:280px;background:var(--panel);padding:20px;border-right:1px solid rgba(255,255,255,0.04);overflow-y:auto}
+      .sidebar-panel{background:var(--bg);padding:14px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-bottom:12px}
+      .sidebar-title{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;margin-bottom:8px;letter-spacing:0.5px}
+      .sidebar-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px}
+      .sidebar-stat-value{font-weight:600;color:var(--accent)}
+      .sidebar-stat-label{color:var(--muted)}
+      .status-indicator{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+      .status-idle{background:#22c55e}
+      .status-running{background:#f59e0b}
+      .status-error{background:#ef4444}
+      .refresh-time{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.4}
+      .content-wrapper{flex:1;padding:24px}
       .wrap{max-width:1100px;margin:0 auto}
       header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
       h1{font-size:20px;margin:0}
@@ -22,19 +35,49 @@
       .namecell{display:flex;align-items:center}
       a.userlink{color:var(--accent);text-decoration:none}
       a.userlink:hover{text-decoration:underline}
+      @media(max-width:1200px){
+        .main-container{flex-direction:column}
+        .sidebar{width:100%;border-right:none;border-bottom:1px solid rgba(255,255,255,0.04);max-width:100%}
+        .sidebar-panel{display:inline-block;margin-right:12px;margin-bottom:12px;min-width:150px}
+      }
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <header>
-        <h1>BigDB Leaderboards</h1>
-        <form class="search" action="/user" method="get">
-          <input name="q" placeholder="Search username or paste userId" />
-          <button type="submit">Lookup</button>
-        </form>
-      </header>
+    <div class="main-container">
+      <!-- Left Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-panel">
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">Total Users:</span>
+            <span class="sidebar-stat-value">{{ status.total_users }}</span>
+          </div>
+          
+          {% if status.next_refresh %}
+          <div class="refresh-time">
+            <strong>Next sync:</strong><br/>
+            {{ status.next_refresh|replace('T', ' ')|truncate(19, True, '') }}
+          </div>
+          {% else %}
+          <div class="refresh-time">
+            <strong>Next sync:</strong><br/>
+            Calculating...
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="content-wrapper">
+        <div class="wrap">
+          <header>
+            <h1>BigDB Leaderboards</h1>
+            <form class="search" action="/user" method="get">
+              <input name="q" placeholder="Search username or paste userId" />
+              <button type="submit">Lookup</button>
+            </form>
+          </header>
 
-      <div class="grid">
+          <div class="grid">
         <div class="panel">
           <strong>Top 10 — XP</strong>
           <table>
