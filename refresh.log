@@ -74,3 +74,25 @@
 2026-03-18 08:55:53,863 - INFO - 127.0.0.1 - - [18/Mar/2026 08:55:53] "GET / HTTP/1.1" 200 -
 2026-03-18 08:55:55,979 - INFO - 127.0.0.1 - - [18/Mar/2026 08:55:55] "GET / HTTP/1.1" 200 -
 2026-03-18 08:55:57,227 - INFO - 127.0.0.1 - - [18/Mar/2026 08:55:57] "GET / HTTP/1.1" 200 -
+2026-03-18 08:57:20,915 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
+2026-03-18 08:57:20,954 - INFO -  * Restarting with stat
+2026-03-18 08:57:21,185 - INFO - ================================================================================
+2026-03-18 08:57:21,186 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-18 08:57:21,186 - INFO - ================================================================================
+2026-03-18 08:57:21,189 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:57:21,189 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:57:21,189 - INFO - Scheduler started
+2026-03-18 08:57:21,189 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-18 08:57:21,206 - WARNING -  * Debugger is active!
+2026-03-18 08:57:21,213 - INFO -  * Debugger PIN: 872-046-699
+2026-03-18 08:57:23,235 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
+2026-03-18 08:57:23,261 - INFO -  * Restarting with stat
+2026-03-18 08:57:23,403 - INFO - ================================================================================
+2026-03-18 08:57:23,403 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-18 08:57:23,403 - INFO - ================================================================================
+2026-03-18 08:57:23,406 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-18 08:57:23,406 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-18 08:57:23,407 - INFO - Scheduler started
+2026-03-18 08:57:23,407 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-18 08:57:23,422 - WARNING -  * Debugger is active!
+2026-03-18 08:57:23,428 - INFO -  * Debugger PIN: 872-046-699
