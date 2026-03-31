@@ -1,0 +1,1 @@
+/Users/blanco/Library/Mobile\ Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/target/release/refresh: /Users/blanco/Library/Mobile\ Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/src/refresh.rs

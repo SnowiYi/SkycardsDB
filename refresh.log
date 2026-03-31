@@ -1,98 +1,150 @@
-2026-03-18 08:50:02,268 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:50:02,268 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:50:02,268 - INFO - Scheduler started
-2026-03-18 08:50:02,268 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
-2026-03-18 08:50:02,284 - WARNING -  * Debugger is active!
-2026-03-18 08:50:02,291 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:50:04,303 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:50:04,476 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:50:04,477 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:50:04,477 - INFO - Scheduler started
-2026-03-18 08:50:04,477 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
-2026-03-18 08:50:04,491 - WARNING -  * Debugger is active!
-2026-03-18 08:50:04,496 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:50:12,562 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:50:12,755 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:50:12,755 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:50:12,755 - INFO - Scheduler started
-2026-03-18 08:50:12,756 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
-2026-03-18 08:50:12,769 - WARNING -  * Debugger is active!
-2026-03-18 08:50:12,775 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:50:15,803 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:50:15,992 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:50:15,993 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:50:15,993 - INFO - Scheduler started
-2026-03-18 08:50:15,993 - INFO - Background scheduler started - first refresh in 10 seconds, then every hour
-2026-03-18 08:50:16,007 - WARNING -  * Debugger is active!
-2026-03-18 08:50:16,013 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:50:27,006 - INFO - ================================================================================
-2026-03-18 08:50:27,007 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
-2026-03-18 08:50:27,007 - INFO - ================================================================================
-2026-03-18 08:50:27,010 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:50:27,011 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:50:27,011 - INFO - Scheduler started
-2026-03-18 08:50:27,011 - INFO - 🚀 Background scheduler initialized - first refresh in 10 seconds, then every hour
-2026-03-18 08:50:27,033 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2026-03-19 11:34:29,162 - INFO - ================================================================================
+2026-03-19 11:34:29,162 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-19 11:34:29,162 - INFO - ================================================================================
+2026-03-19 11:34:29,166 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-19 11:34:29,167 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-19 11:34:29,167 - INFO - Scheduler started
+2026-03-19 11:34:29,167 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-19 11:34:29,251 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:5050
  * Running on http://192.0.0.2:5050
-2026-03-18 08:50:27,033 - INFO - [33mPress CTRL+C to quit[0m
-2026-03-18 08:50:27,034 - INFO -  * Restarting with stat
-2026-03-18 08:50:27,178 - INFO - ================================================================================
-2026-03-18 08:50:27,178 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
-2026-03-18 08:50:27,178 - INFO - ================================================================================
-2026-03-18 08:50:27,181 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:50:27,182 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:50:27,182 - INFO - Scheduler started
-2026-03-18 08:50:27,182 - INFO - 🚀 Background scheduler initialized - first refresh in 10 seconds, then every hour
-2026-03-18 08:50:27,195 - WARNING -  * Debugger is active!
-2026-03-18 08:50:27,201 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:51:42,323 - INFO - 127.0.0.1 - - [18/Mar/2026 08:51:42] "GET / HTTP/1.1" 200 -
-2026-03-18 08:54:11,553 - INFO - 127.0.0.1 - - [18/Mar/2026 08:54:11] "GET / HTTP/1.1" 200 -
-2026-03-18 08:55:31,562 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:55:31,602 - INFO -  * Restarting with stat
-2026-03-18 08:55:31,850 - INFO - ================================================================================
-2026-03-18 08:55:31,850 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
-2026-03-18 08:55:31,850 - INFO - ================================================================================
-2026-03-18 08:55:31,854 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:55:31,854 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:55:31,854 - INFO - Scheduler started
-2026-03-18 08:55:31,854 - INFO - 🚀 Background scheduler initialized - first refresh in 2 seconds, then every hour
-2026-03-18 08:55:31,875 - WARNING -  * Debugger is active!
-2026-03-18 08:55:31,883 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:55:32,890 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:55:32,919 - INFO -  * Restarting with stat
-2026-03-18 08:55:33,066 - INFO - ================================================================================
-2026-03-18 08:55:33,066 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
-2026-03-18 08:55:33,066 - INFO - ================================================================================
-2026-03-18 08:55:33,069 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:55:33,069 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:55:33,069 - INFO - Scheduler started
-2026-03-18 08:55:33,069 - INFO - 🚀 Background scheduler initialized - first refresh in 2 seconds, then every hour
-2026-03-18 08:55:33,105 - WARNING -  * Debugger is active!
-2026-03-18 08:55:33,111 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:55:53,863 - INFO - 127.0.0.1 - - [18/Mar/2026 08:55:53] "GET / HTTP/1.1" 200 -
-2026-03-18 08:55:55,979 - INFO - 127.0.0.1 - - [18/Mar/2026 08:55:55] "GET / HTTP/1.1" 200 -
-2026-03-18 08:55:57,227 - INFO - 127.0.0.1 - - [18/Mar/2026 08:55:57] "GET / HTTP/1.1" 200 -
-2026-03-18 08:57:20,915 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:57:20,954 - INFO -  * Restarting with stat
-2026-03-18 08:57:21,185 - INFO - ================================================================================
-2026-03-18 08:57:21,186 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
-2026-03-18 08:57:21,186 - INFO - ================================================================================
-2026-03-18 08:57:21,189 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:57:21,189 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:57:21,189 - INFO - Scheduler started
-2026-03-18 08:57:21,189 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
-2026-03-18 08:57:21,206 - WARNING -  * Debugger is active!
-2026-03-18 08:57:21,213 - INFO -  * Debugger PIN: 872-046-699
-2026-03-18 08:57:23,235 - INFO -  * Detected change in '/Users/blanco/Library/Mobile Documents/com~apple~CloudDocs/SckyCards/SkycardsDB/web.py', reloading
-2026-03-18 08:57:23,261 - INFO -  * Restarting with stat
-2026-03-18 08:57:23,403 - INFO - ================================================================================
-2026-03-18 08:57:23,403 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
-2026-03-18 08:57:23,403 - INFO - ================================================================================
-2026-03-18 08:57:23,406 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
-2026-03-18 08:57:23,406 - INFO - Added job "Refresh SkyCards data" to job store "default"
-2026-03-18 08:57:23,407 - INFO - Scheduler started
-2026-03-18 08:57:23,407 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
-2026-03-18 08:57:23,422 - WARNING -  * Debugger is active!
-2026-03-18 08:57:23,428 - INFO -  * Debugger PIN: 872-046-699
+2026-03-19 11:34:29,251 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-19 11:34:29,252 - INFO -  * Restarting with stat
+2026-03-19 11:34:29,386 - INFO - ================================================================================
+2026-03-19 11:34:29,390 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-19 11:34:29,390 - INFO - ================================================================================
+2026-03-19 11:34:29,393 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-19 11:34:29,393 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-19 11:34:29,393 - INFO - Scheduler started
+2026-03-19 11:34:29,393 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-19 11:34:29,404 - WARNING -  * Debugger is active!
+2026-03-19 11:34:29,412 - INFO -  * Debugger PIN: 872-046-699
+2026-03-19 11:39:07,866 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:07] "GET / HTTP/1.1" 200 -
+2026-03-19 11:39:08,554 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:08] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-03-19 11:39:08,555 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:08] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-03-19 11:39:08,556 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:08] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-19 11:39:11,530 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:11] "GET /user?q=ed1dc608-623f-4ea7-81f9-66a90857c7eb HTTP/1.1" 200 -
+2026-03-19 11:39:15,345 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:15] "GET / HTTP/1.1" 200 -
+2026-03-19 11:39:43,841 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:43] "GET /user?q=773d6641-6ed4-483c-84df-6e3cebd0b268 HTTP/1.1" 200 -
+2026-03-19 11:39:50,003 - INFO - 127.0.0.1 - - [19/Mar/2026 11:39:50] "GET / HTTP/1.1" 200 -
+2026-03-23 10:18:53,990 - INFO - ================================================================================
+2026-03-23 10:18:53,990 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-23 10:18:53,990 - INFO - ================================================================================
+2026-03-23 10:18:53,995 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-23 10:18:53,995 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-23 10:18:53,995 - INFO - Scheduler started
+2026-03-23 10:18:53,995 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-23 10:18:54,079 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.0.0.2:5050
+2026-03-23 10:18:54,079 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-23 10:18:54,080 - INFO -  * Restarting with stat
+2026-03-23 10:18:54,213 - INFO - ================================================================================
+2026-03-23 10:18:54,213 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-23 10:18:54,213 - INFO - ================================================================================
+2026-03-23 10:18:54,216 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-23 10:18:54,216 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-23 10:18:54,216 - INFO - Scheduler started
+2026-03-23 10:18:54,216 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-23 10:18:54,229 - WARNING -  * Debugger is active!
+2026-03-23 10:18:54,237 - INFO -  * Debugger PIN: 872-046-699
+2026-03-23 10:19:07,729 - INFO - 127.0.0.1 - - [23/Mar/2026 10:19:07] "GET / HTTP/1.1" 200 -
+2026-03-23 10:19:12,324 - INFO - 127.0.0.1 - - [23/Mar/2026 10:19:12] "GET / HTTP/1.1" 200 -
+2026-03-23 10:23:42,854 - INFO - 127.0.0.1 - - [23/Mar/2026 10:23:42] "GET / HTTP/1.1" 200 -
+2026-03-23 10:23:44,689 - INFO - 127.0.0.1 - - [23/Mar/2026 10:23:44] "GET / HTTP/1.1" 200 -
+2026-03-23 10:23:52,227 - INFO - 127.0.0.1 - - [23/Mar/2026 10:23:52] "GET / HTTP/1.1" 200 -
+2026-03-23 10:25:07,861 - INFO - 127.0.0.1 - - [23/Mar/2026 10:25:07] "GET / HTTP/1.1" 200 -
+2026-03-23 10:25:21,472 - INFO - 127.0.0.1 - - [23/Mar/2026 10:25:21] "GET / HTTP/1.1" 200 -
+2026-03-23 23:39:50,817 - INFO - ================================================================================
+2026-03-23 23:39:50,818 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-23 23:39:50,818 - INFO - ================================================================================
+2026-03-23 23:39:50,821 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-23 23:39:50,822 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-23 23:39:50,822 - INFO - Scheduler started
+2026-03-23 23:39:50,822 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-23 23:39:50,904 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.1.52:5050
+2026-03-23 23:39:50,905 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-23 23:39:50,905 - INFO -  * Restarting with stat
+2026-03-23 23:39:51,046 - INFO - ================================================================================
+2026-03-23 23:39:51,046 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-23 23:39:51,046 - INFO - ================================================================================
+2026-03-23 23:39:51,049 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-23 23:39:51,049 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-23 23:39:51,049 - INFO - Scheduler started
+2026-03-23 23:39:51,049 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-23 23:39:51,063 - WARNING -  * Debugger is active!
+2026-03-23 23:39:51,069 - INFO -  * Debugger PIN: 872-046-699
+2026-03-23 23:42:12,246 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:12] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:12,982 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:12] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-03-23 23:42:12,983 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:12] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-23 23:42:12,984 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:12] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-03-23 23:42:21,745 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:21] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:24,931 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:24] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:26,352 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:26] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:28,097 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:28] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:33,765 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:33] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:52,429 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:52] "GET / HTTP/1.1" 200 -
+2026-03-23 23:42:53,541 - INFO - 127.0.0.1 - - [23/Mar/2026 23:42:53] "GET / HTTP/1.1" 200 -
+2026-03-27 08:33:59,788 - INFO - ================================================================================
+2026-03-27 08:33:59,788 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-27 08:33:59,788 - INFO - ================================================================================
+2026-03-27 08:33:59,791 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-27 08:33:59,792 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-27 08:33:59,792 - INFO - Scheduler started
+2026-03-27 08:33:59,792 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-27 08:33:59,870 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.0.0.2:5050
+2026-03-27 08:33:59,870 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-27 08:33:59,871 - INFO -  * Restarting with stat
+2026-03-27 08:33:59,992 - INFO - ================================================================================
+2026-03-27 08:33:59,992 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-27 08:33:59,992 - INFO - ================================================================================
+2026-03-27 08:33:59,994 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-27 08:33:59,994 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-27 08:33:59,994 - INFO - Scheduler started
+2026-03-27 08:33:59,994 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-27 08:34:00,009 - WARNING -  * Debugger is active!
+2026-03-27 08:34:00,015 - INFO -  * Debugger PIN: 872-046-699
+2026-03-27 08:34:09,837 - INFO - 127.0.0.1 - - [27/Mar/2026 08:34:09] "GET / HTTP/1.1" 200 -
+2026-03-27 08:34:10,353 - INFO - 127.0.0.1 - - [27/Mar/2026 08:34:10] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-31 09:36:40,911 - INFO - ================================================================================
+2026-03-31 09:36:40,911 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-31 09:36:40,911 - INFO - ================================================================================
+2026-03-31 09:36:40,917 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-31 09:36:40,917 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-31 09:36:40,917 - INFO - Scheduler started
+2026-03-31 09:36:40,917 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-31 09:36:41,051 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.0.0.2:5050
+2026-03-31 09:36:41,051 - INFO - [33mPress CTRL+C to quit[0m
+2026-03-31 09:36:41,052 - INFO -  * Restarting with stat
+2026-03-31 09:36:41,273 - INFO - ================================================================================
+2026-03-31 09:36:41,273 - INFO - 🌐 Starting Flask server on http://0.0.0.0:5050
+2026-03-31 09:36:41,273 - INFO - ================================================================================
+2026-03-31 09:36:41,277 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-31 09:36:41,277 - INFO - Added job "Refresh SkyCards data" to job store "default"
+2026-03-31 09:36:41,277 - INFO - Scheduler started
+2026-03-31 09:36:41,277 - INFO - 🚀 Background scheduler initialized - first refresh in 30 seconds, then every hour
+2026-03-31 09:36:41,305 - WARNING -  * Debugger is active!
+2026-03-31 09:36:41,319 - INFO -  * Debugger PIN: 872-046-699
+2026-03-31 09:37:00,233 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:00] "GET / HTTP/1.1" 200 -
+2026-03-31 09:37:01,063 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-03-31 09:37:01,065 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /apple-touch-icon-precomposed.png HTTP/1.1[0m" 404 -
+2026-03-31 09:37:01,065 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-03-31 09:37:01,066 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-31 09:37:01,090 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-31 09:37:01,147 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /apple-touch-icon.png HTTP/1.1[0m" 404 -
+2026-03-31 09:37:01,220 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-03-31 09:37:06,561 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:06] "GET /user?q=Kha HTTP/1.1" 200 -
+2026-03-31 09:37:11,297 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:11] "GET /user?q=Khair HTTP/1.1" 200 -
+2026-03-31 09:37:14,625 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:14] "GET /user?q=Kairh HTTP/1.1" 200 -
+2026-03-31 09:37:18,755 - INFO - 127.0.0.1 - - [31/Mar/2026 09:37:18] "GET /user?q=7e7bddf1-0c00-4ff8-b579-c94a3ded677f HTTP/1.1" 200 -

@@ -1,0 +1,34 @@
+[package]
+name = "skycards-db"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "api_test"
+path = "src/api_test.rs"
+
+[[bin]]
+name = "refresh"
+path = "src/refresh.rs"
+
+[dependencies]
+tokio = { version = "1.35", features = ["full"] }
+reqwest = { version = "0.11", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rusqlite = { version = "0.30", features = ["bundled", "chrono"] }
+tokio-rusqlite = "0.5"
+indicatif = "0.17"
+clap = { version = "4.4", features = ["derive"] }
+chrono = "0.4"
+futures = "0.3"
+anyhow = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.11"
+uuid = "1.6"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
